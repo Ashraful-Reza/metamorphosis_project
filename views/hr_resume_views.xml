@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <!-- Form view extension for resume line - when editing a single line -->
+    <record id="hr_resume_line_view_form_inherit" model="ir.ui.view">
+        <field name="name">hr.resume.line.form.inherit</field>
+        <field name="model">hr.resume.line</field>
+        <field name="inherit_id" ref="hr_skills.resume_line_view_form"/>
+        <field name="arch" type="xml">
+           <!-- Add line_type_id_name for domain evaluation -->
+            <xpath expr="//field[@name='line_type_id']" position="after">
+                <field name="line_type_id_name" invisible="1"/>
+            </xpath>
+            
+            <xpath expr="//field[@name='display_type']" position="after">
+                <field name="salary" string="salary" attrs="{'invisible': [('line_type_id_name', '!=', 'Experience')]}"/>
+                <field name="class_division" string="class/Division" attrs="{'invisible': [('line_type_id_name', '!=', 'Education')]}"/>
+                <field name="departure_reason_id" attrs="{'invisible': [('line_type_id_name', '!=', 'Experience')]}"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

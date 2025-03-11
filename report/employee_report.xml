@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="action_report_employee_profile" model="ir.actions.report">
+        <field name="name">Profile Details</field>
+        <field name="model">hr.employee</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">employee_profile_pdf_print.report_employee_template</field>
+        <field name="binding_model_id" ref="hr.model_hr_employee"/> 
+        <field name="binding_type">report</field>
+    </record>
+</odoo>
