@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Add a table to the portal home -->
+    <template id="portal_my_table_view" name="Portal Table View" inherit_id="portal.portal_my_home">
+        <!-- Add our custom table before the original menu -->
+        <!-- <xpath expr="//h3[text()='My account']" position="replace">
+            </xpath> -->
+        <xpath expr="//div[hasclass('o_portal_my_home')]" position="before">
+            <div class="card mb-4">
+                <div class="card-header">
+                    <h4>Portal Summary</h4>
+                </div>
+                <div class="card-body p-0">
+                    <table class="table table-sm mb-0">
+                        <thead class="table-light">
+                            <tr>
+                                <th>Category</th>
+                                <th class="text-end">Count</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <a href="/my/orders">Your Orders</a>
+                                </td>
+                                <td class="text-end">
+                                    <span class="badge rounded-pill text-bg-primary" t-out="order_count or 0"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <a href="/my/invoices">Your Invoices</a>
+                                </td>
+                                <td class="text-end">
+                                    <span class="badge rounded-pill text-bg-primary" t-out="invoice_count or 0"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <a t-att-href="'/my/invoices?filterby=bills'">Our Invoices</a>
+                                    
+                                </td>
+                                <td class="text-end">
+                                    <span class="badge rounded-pill text-bg-primary" t-out="vendor_invoice_count or 0"/>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </xpath>
+    </template>
+</odoo>

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <template id="report_contact_template">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <t t-call="web.external_layout">
+                    <div class="page">
+                        <!-- Header -->
+                        <div class="row">
+                            <div class="col-3">
+                                <img t-if="o.image_1920" t-att-src="image_data_uri(o.image_1920)" style="max-width: 100px"/>
+                            </div>
+                            <div class="col-9">
+                                <h2 t-field="o.name"/>
+                                <div t-if="o.company_type == 'company'" class="mb-2">Company</div>
+                            </div>
+                        </div>
+                        <!-- Contact Details -->
+                        <div class="row mt-4">
+                            <div class="col-6">
+                                <!-- <div t-if="o.phone" class="mb-2">Job position <span t-field="o.job_title"/></div> -->
+                                <div t-if="o.phone" class="mb-2">Phone: <span t-field="o.phone"/></div>
+                                <!-- <div t-if="o.employee_id and o.employee_id.job_id" class="mb-2">Job Position: <span t-field="o.job_id/></div> -->
+                                <div t-if="o.mobile" class="mb-2">Mobile: <span t-field="o.mobile"/></div>
+                                <div t-if="o.email" class="mb-2">Email: <span t-field="o.email"/></div>
+                                <div t-if="o.website" class="mb-2">Website: <span t-field="o.website"/></div>
+                            </div>
+                            <div class="col-6">
+                                <div t-if="o.street or o.street2 or o.city or o.state_id or o.zip or o.country_id">
+                                    <strong>Address:</strong>
+                                    <div t-if="o.street" t-field="o.street"/>
+                                    <div t-if="o.street2" t-field="o.street2"/>
+                                    <div>
+                                        <span t-if="o.city" t-field="o.city"/><span t-if="o.city and o.state_id">, </span>
+                                        <span t-if="o.state_id" t-field="o.state_id"/>
+                                        <span t-if="o.zip" t-field="o.zip"/>
+                                    </div>
+                                    <div t-if="o.country_id" t-field="o.country_id"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+</odoo>

@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Define the paper format -->
+    <record id="paperformat_mushak" model="report.paperformat">
+        <field name="name">Mushak Format</field>
+        <field name="default" eval="True"/>
+        <field name="format">A4</field>
+        <field name="orientation">Portrait</field>
+        <field name="margin_top">20</field>
+        <field name="margin_bottom">15</field>
+        <field name="margin_left">10</field>
+        <field name="margin_right">10</field>
+        <field name="header_line" eval="False"/>
+        <field name="header_spacing">15</field>
+        <field name="dpi">90</field>
+    </record>
+    <!-- Register the Mushak 6.6 report -->
+    <record id="mushak_6_6_report" model="ir.actions.report">
+        <field name="name">Mushak 6.6 Report</field>
+        <field name="model">account.move</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">custom_mushak.mushak_6_6_template</field>
+        <field name="report_file">custom_mushak.mushak_6_6_template</field>
+        <field name="binding_model_id" ref="account.model_account_move"/>
+        <field name="binding_type">report</field>
+        <field name="paperformat_id" ref="paperformat_mushak"/>
+    </record>
+    <!-- Mushak 6.6 report template -->
+    <template id="mushak_6_6_template">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="doc">
+                <t t-call="web.basic_layout">
+                    <div class="page" style="font-size: 12px;">
+                        <!-- Header with Logo and Title -->
+                        <div class="row">
+                            <div class="col-3 text-center">
+                                <img src="/custom_mushak/static/description/nrb_logo.png" style="max-height: 80px;" alt="NBR Logo"/>
+                            </div>
+                            <div class="col-6 text-center">
+                                <p style="font-size: 14px; margin-bottom: 0;">গণপ্রজাতন্ত্রী বাংলাদেশ সরকার</p>
+                                <p style="font-size: 14px; margin-bottom: 0;">জাতীয় রাজস্ব বোর্ড</p>
+                                <div style="background-color: #ffebcd; padding: 5px; margin-top: 10px;">
+                                    <h4 style="margin: 0;">উৎসে কর কর্তন সনদপত্র</h4>
+                                </div>
+                                <p style="font-size: 12px; margin-top: 5px;">বিধি ৪০ এর উপ-বিধি (১) এর দফা (চ) দ্রষ্টব্য</p>
+                            </div>
+                            <div class="col-3 text-right">
+                                <p style="font-size: 14px;">মুসক - ৬.৬</p>
+                            </div>
+                        </div>
+                        <!-- Company Information -->
+                        <div class="row mt-3">
+                            <div class="col-4">উৎসে কর কর্তনকারী ব্যক্তির নাম</div>
+                            <div class="col-1 text-center">:</div>
+                            <div class="col-7">
+                                <span t-field="doc.company_id.name"/>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-4">উৎসে কর কর্তনকারী ব্যক্তির ঠিকানা</div>
+                            <div class="col-1 text-center">:</div>
+                            <div class="col-7">
+                                <span t-field="doc.company_id.street"/>
+                                <t t-if="doc.company_id.street2">,
+                                    <span t-field="doc.company_id.street2"/>
+                                </t>,
+                                <span t-field="doc.company_id.city"/>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-4">উৎসে কর কর্তনকারী ব্যক্তির টি আই এন (প্রযোজ্য ক্ষেত্রে)</div>
+                            <div class="col-1 text-center">:</div>
+                            <div class="col-7">
+                                <span t-field="doc.company_id.vat"/>
+                            </div>
+                        </div>
+                        <div class="row mt-4">
+                            <div class="col-3">উৎসে কর কর্তন সনদপত্র নং</div>
+                            <div class="col-1 text-center">:</div>
+                            <div class="col-3">
+                                <span t-field="doc.name"/>
+                            </div>
+                            <div class="col-2">জারির তারিখ</div>
+                            <div class="col-1 text-center">:</div>
+                            <div class="col-2">
+                                <t t-if="doc.invoice_date">
+                                    <span t-esc="doc.invoice_date.strftime('%d-%m-%Y')"/>
+                                </t>
+                            </div>
+                        </div>
+                        <!-- Explanatory Text -->
+                        <div class="row mt-4">
+                            <div class="col-12" style="font-size: 12px; text-align: justify;">
+                                এই মর্মে প্রত্যয়ন করা যাইতেছে যে, অধ্যাদেশ ধারা ৫২ অনুযায়ী উৎসে কর কর্তনযোগ্য ব্যবহার হইতে এতদসঙ্গে বর্ণনা সরবরাহ কর বাবদ উৎসে কর কর্তন করা হইল। কর্তনকৃত মূল্য সংযোজন করের অর্থ মূল 
+                                চালান / ডেবিট নোট / ক্রেডিট নোটসহ পূরণকৃত সংযোজন ব্যবহারে সনদপত্র সেকশানসহ ভর্তা প্রদান করা হইয়াছে (প্রযোজ্য ক্ষেত্রে)।
+                            </div>
+                        </div>
+                        <!-- Main Table -->
+                        <table class="table table-sm table-bordered mt-4" style="font-size: 12px;">
+                            <thead>
+                                <tr class="text-center">
+                                    <th rowspan="2" style="vertical-align: middle; width: 5%;">ক্রমিক নং</th>
+                                    <th colspan="2" style="width: 30%;">সরবরাহকারীর</th>
+                                    <th colspan="2" style="width: 25%;">সংযুক্ত কর চালানপত্র</th>
+                                    <th rowspan="2" style="vertical-align: middle; width: 12%;">মোট সরবরাহ মূল্য (টাকায়)</th>
+                                    <th rowspan="2" style="vertical-align: middle; width: 14%;">মূসকের পরিমাণ (টাকা)</th>
+                                    <th rowspan="2" style="vertical-align: middle; width: 14%;">উৎসে কর্তনকৃত মূসকের পরিমাণ (টাকা)</th>
+                                </tr>
+                                <tr class="text-center">
+                                    <th style="width: 15%;">নাম</th>
+                                    <th style="width: 15%;">বি আই এন</th>
+                                    <th style="width: 12%;">নম্বর</th>
+                                    <th style="width: 13%;">ইস্যুর তারিখ</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- Calculate totals -->
+                                <t t-set="total_amount" t-value="sum(doc.invoice_line_ids.mapped('price_subtotal'))"/>
+                                <t t-set="total_tax" t-value="sum(doc.invoice_line_ids.mapped('price_total')) - total_amount"/>
+                                <!-- Display partner row -->
+                                <tr>
+                                    <td class="text-center">1</td>
+                                    <td>
+                                        <span t-field="doc.partner_id.name"/>
+                                    </td>
+                                    <td>
+                                        <span t-field="doc.partner_id.bin_id"/>
+                                    </td>
+                                    <td>
+                                        <span t-field="doc.name"/>
+                                    </td>
+                                    <td class="text-center">
+                                        <t t-if="doc.invoice_date">
+                                            <span t-esc="doc.invoice_date.strftime('%d-%m-%Y')"/>
+                                        </t>
+                                    </td>
+                                    <td class="text-right">
+                                        <span t-esc="'{:,.2f}'.format(total_amount)"/>
+                                    </td>
+                                    <td class="text-right">
+                                        <span t-esc="'{:,.2f}'.format(total_tax)"/>
+                                    </td>
+                                    <td class="text-right">
+                                        <span t-esc="'{:,.2f}'.format(total_tax)"/>
+                                    </td>
+                                </tr>
+                                <!-- Add empty rows to match the format -->
+                                <t t-foreach="range(1, 8)" t-as="i">
+                                    <tr style="height: 25px;">
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                </t>
+                            </tbody>
+                        </table>
+                        <!-- Signature Section -->
+                        <div class="row mt-5">
+                            <div class="col-12">
+                                <p style="font-weight: bold;">ক্ষমতাপ্রাপ্ত কর্মকর্তা -</p>
+                            </div>
+                        </div>
+                        <div class="row mt-4">
+                            <div class="col-1">স্বাক্ষর</div>
+                            <div class="col-1 text-center">:</div>
+                            <div class="col-4" style="border-bottom: 1px solid black;"></div>
+                        </div>
+                        <div class="row mt-3">
+                            <div class="col-1">নাম</div>
+                            <div class="col-1 text-center">:</div>
+                            <div class="col-4" style="border-bottom: 1px solid black;"></div>
+                        </div>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+</odoo>

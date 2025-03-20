@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="sales_details" inherit_id="portal.portal_layout">
+            <xpath expr="//h3[text()='My account']" position="replace">
+                <h3 class="my-3">Sales Portal </h3>
+                
+            </xpath>
+        </template>
+    </data>
+</odoo>
+<!-- <?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="portal_layout" inherit_id="portal.portal_layout">
+        <xpath expr="//div[hasclass('o_porta')]" position="inside">
+            <t t-call="portal.portal_layout">
+                <t t-set="ur">/my/sales</t>
+                <t t-set="title">Sales</t>
+            </t>
+        </xpath>
+    </template>
+</odoo> -->

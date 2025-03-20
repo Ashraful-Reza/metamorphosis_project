@@ -1,0 +1,233 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data >
+        <template id="stock_report_inherit" inherit_id="stock.report_delivery_document">
+            <xpath expr="//div[@name='outgoing_delivery_address']" position="attributes">
+                <attribute name="style">display: none;</attribute>
+            </xpath>
+            <!-- <xpath expr="//div[@class='page']/h2/span[@t-field='o.or']" position="attributes">
+                <attribute name="style">display: none;</attribute>
+            </xpath> -->
+            <xpath expr="//div[@class='page']/h2/span[@t-field='o.name']" position="replace">
+                <table style="width:100%; border-collapse: collapse; border: 1px solid black;">
+                    <tr>
+                        <td style="width:50%; padding: 8px; border-right: none; border-left: 1px solid black; border-top: 1px solid black; border-bottom: 1px solid black;">
+                            <span t-esc="o.location_id.warehouse_id.name" style="font-weight: bold;"/>
+                        </td>
+                        <td style="width:50%; padding: 8px; text-align:right; border-left: none; border-right: 1px solid black; border-top: 1px solid black; border-bottom: 1px solid black;">
+                            <span t-esc="o.name" style="font-weight: bold;"/>
+                        </td>
+                    </tr>
+                </table>
+                <br/>
+                
+                <!-- <div class="container border mb-3" style="padding-top: 10px;"> -->
+                <div class="row" style="border: 1px solid black;">
+                    <div class="col-7" style='border-right:1px solid #000000;'>
+                        <!-- First Row -->
+                        <div class="row" style="margin-top:4px;">
+                            <!-- CLIENTE -->
+                            <div class="col-3" style="padding-right:0 !important;border-bottom: none; padding-left:4px; padding-top:2px;">
+                                <strong style="font-size: 13px;">CLIENTE</strong>
+                            </div>
+                            <div class="col-9" style="padding-right:0;border-bottom: 1px solid black; padding-top:2px;">
+                                <span t-if="o.should_print_delivery_address()" style="font-size: 13px;">
+                                    <span t-esc="(o.move_ids[0].partner_id or o.partner_id).name"/></span>
+                            </div>
+                        </div>
+                        <!-- Second Row (DIRECCION) -->
+                        <div class="row" style="padding-bottom:4px !important;height:30px;">
+                            <div class="col-3 p-1">
+                                <strong style="font-size: 13px;">DIRECCION</strong>
+                            </div>
+                            <div class="col-9" style="padding-bottom:4px !important; border-bottom: 1px solid black;">
+                                <span t-if="o.should_print_delivery_address()" style="font-size: 13px;">
+                                    <span t-esc="(o.move_ids[0].partner_id or o.partner_id).street"/>
+                                </span>
+                            </div>
+                        </div>
+                        <!-- Third Row (TELEPHONE) -->
+                        <div class="row" style="">
+                            <div class="col-3 p-1" style="border-bottom:none;!important;">
+                                <strong style="font-size: 13px;">TELEPHONE</strong>
+                            </div>
+                            <div class="col-3" style="border-bottom: 1px solid black;">
+                                <span t-if="o.should_print_delivery_address()" style="font-size: 13px;">
+                                    <span t-esc="(o.move_ids[0].partner_id or o.partner_id).phone"/></span>
+                            </div>
+                            <div class="col-2">
+                                <strong style="font-size: 13px;">ORDEN C.</strong>
+                            </div>
+                            <div class="col-4" style="border-bottom: 1px solid black;">
+                                <span t-if="o.origin" style="font-size: 13px;">
+                                    <span t-esc="o.origin"/></span>
+                            </div>
+                        </div>
+                        <!-- Fourth Row (VENDEDOR) -->
+                        <div class="row" style="">
+                            <div class="col-3" style="padding-left:4px;">
+                                <strong style="font-size: 13px;">VENDEDOR</strong>
+                            </div>
+                            <div class="col-9" style="font-size: 13px;">
+                                <span t-if="o.should_print_delivery_address()" style="font-size: 13px;">
+                                    <span t-esc="(o.move_ids[0].partner_id or o.partner_id).phone"/></span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Second Column -->
+                    <div class="col-5">
+                        <!-- First Row -->
+                        <div class="row" style="padding-bottom:1px;">
+                            <div class="col-3" style="border-bottom: none; padding-left:4px;">
+                                <strong style="font-size: 13px;">FECHA</strong>
+                            </div>
+                            <div class="col-9" style="border-bottom: 1px solid black;">
+                                <span t-if="o.scheduled_date" style="font-size: 13px;">
+                                    <span t-esc="o.scheduled_date and o.scheduled_date.strftime('%d/%m/%Y') or ''"/></span>
+                            </div>
+                        </div>
+                        <!-- Second Row (ALMACEN) -->
+                        <div class="row" style="padding-bottom:1px;">
+                            <div class="col-3" style="border-bottom: none;padding-left:4px;">
+                                <strong style="font-size: 13px;">ALMACEN</strong>
+                            </div>
+                            <div class="col-9" style="border-bottom: 1px solid black;">
+                                <span t-if="o.should_print_delivery_address()" style="font-size: 13px;">
+                                    <span t-esc="(o.move_ids[0].location_id or o.location_id).name"/> </span>
+                            </div>
+                        </div>
+                        <!-- Third Row (IMPORTAR) -->
+                        <div class="row" style="padding-bottom:1px;">
+                            <div class="col-3" style="border-bottom: none;padding-left:4px;">
+                                <strong style="font-size: 13px;">IMPORTAR</strong>
+                            </div>
+                            <div class="col-9" style="border-bottom: 1px solid black;">
+                                <span t-if="o.should_print_delivery_address()" style="font-size: 13px;" >
+                                    <span t-esc="(o.move_ids[0].partner_id or o.partner_id).phone"/></span>
+                            </div>
+                        </div>
+                        <!-- Fourth Row (MONEDA) -->
+                        <div class="row" style="padding-bottom:1px;">
+                            <div class="col-3" style="border-bottom: none;padding-left:4px;">
+                                <strong style="font-size: 13px;">MONEDA</strong>
+                            </div>
+                            <div class="col-9" style="border-bottom: 1px solid black; font-size:12px;">
+                                <span t-esc="o.company_id.currency_id.name"/>
+                            </div>
+                        </div>
+                        <!-- Fifth Row (TASA) -->
+                        <div class="row" style="padding-bottom:1px;">
+                            <div class="col-3" style="padding-left:4px;">
+                                <strong style="font-size: 13px;">TASA</strong>
+                            </div>
+                            <div class="col-9">
+                                <span t-if="o.should_print_delivery_address()" style="font-size: 13px;">
+                                    <span t-esc="(o.move_ids[0].partner_id or o.partner_id).phone"/></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <br/>
+                <div class="col-12">
+                    <table class="table" style="border-collapse: collapse; width: 100%;border:1px solid black !important;">
+                        <thead>
+                            <tr>
+                                <th style="width: 15%; font-size: 12px; text-align: left;">CODIGO</th>
+                                <th style="width: 15%; font-size: 12px; text-align: left;">DESCRIPTION</th>
+                                <th style="width: 15%; font-size: 12px; text-align: left;">ATRIBUTO</th>
+                                <th style="width: 15%; font-size: 12px; text-align: center;">UNIDAD</th>
+                                <th style="width: 15%; font-size: 12px; text-align: right;">CANTIDAD</th>
+                                <th style="width: 10%; font-size: 12px; text-align: right;">COSTO</th>
+                                <th style="width: 10%; font-size: 12px; text-align: right;">TOTAL</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <t t-foreach="o.move_ids_without_package" t-as="line">
+                                <tr>
+                                    <!-- CODIGO (Product Internal Reference) -->
+                                    <td style="text-align: left; font-size: 12px;">
+                                        <t t-esc="line.product_id.default_code or ''"/>
+                                    </td>
+                                    <!-- DESCRIPTION (Product Name) -->
+                                    <td style="text-align: left; font-size: 12px;">
+                                        <t t-esc="line.product_id.name or ''"/>
+                                    </td>
+                                    <!-- ATRIBUTO (Variant Name) -->
+                                    <td style="text-align: left; font-size: 12px;">
+                                        <t t-esc="', '.join(attr.name for attr in line.product_id.product_template_attribute_value_ids) or ''"/>
+                                    </td>
+                                    <!-- UNIDAD (Unit of Measure) -->
+                                    <td style="text-align: center; font-size: 12px;">
+                                        <t t-esc="line.product_uom.name or ''"/>
+                                    </td>
+                                    <!-- CANTIDAD (Quantity) -->
+                                    <td style="text-align: right; font-size: 12px;">
+                                        <t t-esc="line.product_uom_qty"/>
+                                    </td>
+                                    <!-- COSTO (Unit Price) -->
+                                    <td style="text-align: right; font-size: 12px;">
+                                        <t t-esc="line.price_unit or 0.0"/>
+                                    </td>
+                                    <!-- TOTAL (Total Price) -->
+                                    <td style="text-align: right; font-size: 12px;">
+                                        <t t-esc="line.product_uom_qty * line.price_unit"/>
+                                    </td>
+                                </tr>
+                            </t>
+                        </tbody>
+                    </table>
+                </div>
+                <br/>
+                <!-- OBSERVACION Title (Outside the Box) -->
+                <div style="font-weight: bold; margin-bottom: 5px;">OBSERVACION</div>
+                <!-- Observation Field (Notes) -->
+                <div class="row border-botto" style="border: 1px solid black; padding: 5px; width: 70%;">
+                    <div class="col-6 p-2">
+                        <span t-if="o.note" tyle="font-size: 12px;">
+                            <span t-esc="o.note"/></span>
+                    </div>
+                </div>
+                <br/>
+                <br/>
+                <xpath expr="//div[@class='row mt32 mb32']" position="after">
+                    <div class="row mt-5 text-center">
+                        <!-- Receiver Signature -->
+                        <div class="col-6">
+                            <strong style="font-weight: bold;border-top:1px solid black;"><span style="color:white;">------</span>DESPACHADO POR<span style="color:white;">------</span></strong>
+                        </div>
+                        <!-- Dispatched Signer -->
+                        <div class="col-6">
+                            <strong style="font-weight: bold;border-top:1px solid black;"><span style="color:white;">------</span>RECIBIDO POR<span style="color:white;">------</span></strong>                            
+                        </div>
+                    </div>
+                </xpath>
+                <!-- signature add -->
+                <!-- 3rd table end -->
+            </xpath>
+            <!-- Observation Field (Notes) -->
+            <xpath expr="//div[@name='div_origin']" position="attributes">
+                <attribute name="t-if">False</attribute>
+            </xpath>
+            <!-- Hide the 'scheduled_date' field -->
+            <xpath expr="//div[@name='div_sched_date']" position="attributes">
+                <attribute name="t-if">False</attribute>
+            </xpath>
+            <xpath expr="//table[@name='stock_move_line_table']" position="attributes">
+                <attribute name="style">display: none !important;</attribute>
+            </xpath>
+            <xpath expr="//table[@name='stock_move_table']" position="attributes">
+                <attribute name="style">display: none !important;</attribute>
+            </xpath>
+        </template>
+    </data>
+</odoo>
+<!-- <xpath expr="//div" position="replace">
+                <div style="position: fixed; top: 10px; right: 10px; font-size: 12px; text-align: right;">
+                    <span>Page
+                        <t t-esc="page"/> of
+                        <t t-esc="total_pages"/>
+                    </span>
+                </div>
+            </xpath> -->

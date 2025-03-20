@@ -1,0 +1,25 @@
+<odoo>
+    <record id="view_sale_discount_approval_wizard" model="ir.ui.view">
+        <field name="name">sale.discount.approval.form</field>
+        <field name="model">sale.discount.approval</field>
+        <field name="arch" type="xml">
+            <form string="Discount Approval">
+                <group>
+                    <field name="sale_order_id" readonly="1"/>
+                    <field name="discount_reason"/>
+                </group>
+                <footer>
+                    <button name="action_approve_discount" string="Approve" type="object" class="oe_highlight"/>
+                    <button string="Cancel" class="oe_link" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_sale_discount_approval" model="ir.actions.act_window">
+        <field name="name">Discount Approval</field>
+        <field name="res_model">sale.discount.approval</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+</odoo>

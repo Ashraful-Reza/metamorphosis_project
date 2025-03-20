@@ -1,0 +1,51 @@
+<odoo>
+    <record id="view_bom_transfer_wizard_form" model="ir.ui.view">
+        <field name="name">bom.transfer.wizard.form</field>
+        <field name="model">bom.transfer.wizard</field>
+        <field name="arch" type="xml">
+            <form string="BOM Transfer Wizard">
+                <group>
+                    <field name="picking_type_id" options="{'no_create':True}"/>
+                    <field name="location_dest_id" options="{'no_create':True}"/>
+                    <field name="location_id" options="{'no_create':True}"/>
+                    <field name="scheduled_date"/>
+
+                    <field name="is_bom_product" invisible="is_mo_product==True"/>
+                    <field name="bom_id" invisible="is_bom_product==False" options="{'no_create':True}"/>
+
+                    <field name="is_mo_product" invisible="is_bom_product==True"/>
+                    <field name="production_id" invisible="is_mo_product==False" required="is_mo_product==True" options="{'no_create':True}"/>
+                    <field name="product_qty"/>
+                    <field name="production_bom_id" invisible="1" readonly="production_id==True" options="{'no_create':True}"/>
+                </group>
+                    <field name="bom_lines" widget="one2many" nolabel="1">
+                        <tree create="0" editable="top">
+                            <field name="wizard_id" readonly="True" column_invisible="1"/>
+                            <field name="product_id" readonly="True" options="{'no_create':True}"/>
+                            <field name="product_uom_qty" readonly="True"/>
+                            <field name="product_uom" readonly="True" options="{'no_create':True}"/>
+                        </tree>                    
+                    </field>
+                <footer>
+                    <button string="Transfer BOM" type="object" name="add_move_data_to_picking" class="btn-primary"/>
+                    <button string="Cancel" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_bom_transfer_wizard" model="ir.actions.act_window">
+        <field name="name">BOM Transfer</field>
+        <field name="res_model">bom.transfer.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+        <field name="view_id" ref="view_bom_transfer_wizard_form"/>
+    </record>
+
+    <record id="menu_bom_transfer" model="ir.ui.menu">
+        <field name="name">Transfer BOM</field>
+        <field name="sequence" type="int">67</field>
+        <field name="parent_id" ref="stock.menu_stock_transfers"/>
+        <field name="action" ref="action_bom_transfer_wizard"/>
+    </record>
+</odoo>

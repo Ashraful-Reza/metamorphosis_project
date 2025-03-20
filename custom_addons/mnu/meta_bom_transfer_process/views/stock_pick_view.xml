@@ -1,0 +1,49 @@
+<odoo>
+  <data>
+
+    <!-- Tree view for "model" -->
+    <!-- <record id="view_stock_picking_bom_tree" model="ir.ui.view">
+        <field name="name">view.stock.picking.bom.tree</field>
+        <field name="model">stock.picking</field>
+        <field name="inherit_id" ref="base.view_model_tree" />
+        <field name="arch" type="xml">
+            
+        </field>
+    </record> -->
+
+    <!-- Form view for "stock.picking" -->
+    <record id="view_stock_picking_bom_form" model="ir.ui.view">
+        <field name="name">view.stock.picking.bom.form</field>
+        <field name="model">stock.picking</field>
+         <field name="inherit_id" ref="stock.view_picking_form"/>
+        <field name="arch" type="xml">
+            <!-- <xpath expr="//header" position="inside">
+              <button name="open_btw_wizard" string="Transfer BOM" type="object" class="btn-primary"/>
+            </xpath> -->
+
+            <xpath expr="//field[@name='partner_id']" position="after">
+              <field name="vendor_reference" invisible="picking_type_code != 'incoming'" readonly="state not in ['draft']"/>
+            </xpath>
+
+            <xpath expr="//sheet/group[1]" position="after">
+              <!-- <field name="is_internal" readonly="1" invisible="1"/> -->
+              <group invisible="picking_type_code != 'internal'">
+                <field name="sale_id" readonly="0"/>
+                <field name="part_no" invisible="sale_id==False"/>
+                
+                <field name="product_tmpl_id" invisible="1" readonly="1"/>
+                
+                <field name="is_bom_product" invisible="is_mo_product==True" readonly="1"/>
+                <field name="bom_id" invisible="is_bom_product==False" readonly="1"/>
+
+                <field name="is_mo_product" invisible="is_bom_product==True" readonly="1"/>
+                <field name="production_id" invisible="is_mo_product!=True" readonly="1"/>
+                <field name="production_bom_id" invisible="1" readonly="1"/>
+                <field name="product_qty" readonly="1"/>                
+              </group>
+            </xpath>
+        </field>
+    </record>
+
+  </data>
+</odoo>

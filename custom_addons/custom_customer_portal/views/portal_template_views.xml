@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <template id="portal_breadcrumbs" name="Portal Menu: My Sales Order" inherit_id="portal.portal_breadcrumbs" priority="50">
+        <xpath expr="//ol[hasclass('o_portal_submenu')]" position="inside">
+            <li t-if="page_name == 'sales_orders'" class="breadcrumb-item active">
+                My Sales Orders
+            </li>
+        </xpath>
+    </template>
+    <template id="portal_my_home" name="My Portal" inherit_id="portal.portal_my_home">
+        <xpath expr="//div[hasclass('o_portal_docs')]" position="inside">
+        <t t-call="portal.portal_docs_entry">
+                <t t-set="bg_color" t-value="'alert alert-primary'"/>
+                <t t-set="placeholder_count" t-value="'sales_counts'"/>
+                <t t-set="title">My Sales Order</t>
+                <t t-set="url" t-value="'/sales/order'"/>
+                <t t-set="show_count" t-value="True"/>
+            </t>
+        </xpath>
+        <!-- <div id="portal_alert_category" position="after">
+            <t t-call="portal.portal_docs_entry">
+                <t t-set="bg_color" t-value="'alert alert-primary'"/>
+                <t t-set="placeholder_count" t-value="'sales_counts'"/>
+                <t t-set="title">My Sales Order</t>
+                <t t-set="url" t-value="'/sales/order'"/>
+                <t t-set="show_count" t-value="True"/>
+            </t>
+        </div> -->
+    </template>
+    
+</odoo>

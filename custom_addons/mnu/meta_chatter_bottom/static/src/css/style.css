@@ -1,0 +1,20 @@
+.o_form_editable.d-flex{
+	display: grid !important;
+	grid-template-columns: 1fr;
+	height: auto !important;
+	gap: 40px;
+}
+
+.o-mail-Chatter {
+	height: auto;
+	width: 100% !important;
+	max-width: 100%;
+}
+
+.o-mail-Form-chatter.o-aside{
+	width: 100% !important;
+}
+
+.o_form_view .o_form_sheet_bg{
+	max-width: 100% !important;
+}

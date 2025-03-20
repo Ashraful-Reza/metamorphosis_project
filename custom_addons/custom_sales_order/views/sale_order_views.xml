@@ -1,0 +1,23 @@
+<odoo>
+    <record id="view_order_form_inherit_discount" model="ir.ui.view">
+        <field name="name">sale.order.form.discount.approval</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="arch" type="xml">
+            <!-- Button visibility based on discount_approved field -->
+            <!-- <xpath expr="//header" position="inside">
+                <button name="action_confirm" string="Confirm Order"
+                        type="object"
+                        class="oe_highlight"
+                        modifiers="{'invisible': [('discount_approved', '=', False)]}"/>
+            </xpath> -->
+            <!-- Fields for discount approval -->
+            <xpath expr="//sheet/group" position="after">
+                <group>
+                    <field name="discount_approved" readonly="1"/>
+                    <field name="discount_reason" readonly="1"/>
+                </group>
+            </xpath>
+        </field>
+    </record>
+</odoo>

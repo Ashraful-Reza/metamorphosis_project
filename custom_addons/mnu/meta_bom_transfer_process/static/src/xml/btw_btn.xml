@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<templates id="template" xml:space="preserve">
+   <t t-name="meta_bom_transfer_process.ListView.Buttons" t-inherit="web.ListView.Buttons" t-inherit-mode="primary">
+        <xpath expr="//div[hasclass('o_list_buttons')]" position="inside">
+           <button t-if="nbSelected == 0"
+           class="btn btn-primary" type="button"  t-on-click="OnTBClick">
+               Transfer BOM
+           </button>
+       </xpath>
+   </t>
+</templates>
