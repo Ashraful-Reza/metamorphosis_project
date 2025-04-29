@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <!-- Extend the employee form view to add Nominee Record tab -->
+    <record id="view_employee_form_inherit_emergency" model="ir.ui.view">
+        <field name="name">hr.employee.form.inherit.emergency</field>
+        <field name="model">hr.employee</field>
+        <field name="inherit_id" ref="hr.view_employee_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//page[@name='training_record']" position="after">
+                <page string="Emergency" name="emergency_record">
+                    <field name="contact_ids">
+                        <tree editable="bottom">
+                            <field name="sequence" widget="handle"/>
+                            <field name="name"/>
+                            <field name="telephone_no"/>
+                            <field name="mobile_no"/>
+                            <field name="contact_address"/>
+                        </tree>
+                    </field>
+                </page>
+            </xpath>
+        </field>
+    </record>
+    
+    <!-- Form view  -->
+    <record id="view_hr_employee_emergency_form" model="ir.ui.view">
+        <field name="name">hr.employee.emergency.form</field>
+        <field name="model">hr.employee.emergency</field>
+        <field name="arch" type="xml">
+            <form string="Employee emergency">
+                <sheet>
+                    <div class="oe_title">
+                        <label for="name" class="oe_edit_only"/>
+                        <h1><field name="name" placeholder="Name"/></h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="telephone_no"/>
+                        </group>
+                        <group>
+                            <field name="mobile_no"/>
+                        </group>
+                        <group>
+                            <field name="contact_address"/>
+                            <field name="sequence" groups="base.group_no_one"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+</odoo>

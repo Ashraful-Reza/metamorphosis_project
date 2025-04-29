@@ -1,0 +1,15 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_hr_employee_profile_user,Employee Profile User,model_hr_employee,base.group_user,1,0,0,0
+access_hr_employee_profile_manager,Employee Profile Manager,model_hr_employee,hr.group_hr_manager,1,1,1,1
+access_hr_employee_nominee,HR Employee Nominee,model_hr_employee_nominee,,1,1,1,1
+access_hr_employee_childrenn,HR Employee Childrenn,model_hr_employee_childrenn,,1,1,1,1
+access_hr_employee_training,HR Employee training,model_hr_employee_training,,1,1,1,1
+access_hr_employee_emergency,HR Employee Emergency,model_hr_employee_emergency,,1,1,1,1
+
+
+
+
+
+
+
+

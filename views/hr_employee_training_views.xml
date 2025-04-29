@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <!-- Extend the employee form view to add Nominee Record tab -->
+    <record id="view_employee_form_inherit_training" model="ir.ui.view">
+        <field name="name">hr.employee.form.inherit.training</field>
+        <field name="model">hr.employee</field>
+        <field name="inherit_id" ref="hr.view_employee_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//page[@name='childrenn_record']" position="after">
+                <page string="Training" name="training_record">
+                    <field name="trn_ids">
+                        <tree editable="bottom">
+                            <field name="sequence" widget="handle"/>
+                            <field name="training_title"/>
+                            <field name="training_year"/>
+                            <field name="institute"/>
+                        </tree>
+                    </field>
+                </page>
+            </xpath>
+        </field>
+    </record>
+    
+    <!-- Form view  -->
+    <record id="view_hr_employee_training_form" model="ir.ui.view">
+        <field name="name">hr.employee.training.form</field>
+        <field name="model">hr.employee.training</field>
+        <field name="arch" type="xml">
+            <form string="Employee training">
+                <sheet>
+                    <div class="oe_title">
+                        <label for="training_title" class="oe_edit_only"/>
+                        <h1><field name="training_title" placeholder="Training Name"/></h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="training_year"/>
+                        </group>
+                        <group>
+                            <field name="institute"/>
+                            <field name="sequence" groups="base.group_no_one"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+</odoo>

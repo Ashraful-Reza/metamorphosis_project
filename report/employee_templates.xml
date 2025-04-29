@@ -1,0 +1,593 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <template id="report_employee_template">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <t t-call="web.external_layout">
+                    <div class="page">
+                        <!-- Header Section -->
+                        <div class="text-center mb-4" style="width: 100%; display: block; text-align: center;">
+                            <h3 style="margin-bottom: 5px; text-align: center;">Cross World Group</h3>
+                            <h4 style="margin-bottom: 5px; text-align: center;">HR &amp; Admin Department</h4>
+                            <h4 style="text-decoration: underline; margin-bottom: 15px; text-align: center;">Employee Information</h4>
+                        </div>
+                        <!-- Company Information Section -->
+                        <div class="row">
+                            <div class="col-8" style="padding-left: 220px; ">
+                                <table class="table table-sm table-borderless" style="font-size: 15px !important;">
+                                    <tr>
+                                        <td style="width: 3%; vertical-align: top;">
+                                            <strong>Company</strong>
+                                        </td>
+                                        <td style="width: 70%;">
+                                            <span t-field="o.company_id.name"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="vertical-align: top;">
+                                            <strong>Department</strong>
+                                        </td>
+                                        <td>
+                                            <span t-field="o.department_id.name"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="vertical-align: top;">
+                                            <strong>Designation</strong>
+                                        </td>
+                                        <td>
+                                            <span t-field="o.job_id.name"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="vertical-align: top;">
+                                            <strong>Reports To</strong>
+                                        </td>
+                                        <td>
+                                            <span t-field="o.parent_id.name"/>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                        <br/>
+                        <br/>
+                        <!-- Two tables side by side via a table layout -->
+                        <table class="table table-borderless" style="margin-bottom: 20px; font-size: 13px !important;">
+                            <tr>
+                                <td width="50%" style="vertical-align: top; padding: 0;">
+                                    <!-- First Table -->
+                                    <table class="table table-borderless" style="margin-bottom: 0;">
+                                        <tr>
+                                            <td width="35%">
+                                                <strong>PIN  </strong>
+                                            </td>
+                                            <td width="5%" style="vertical-align: top; text-align: center;">:</td>
+                                            <td width="60%">
+                                                <span t-field="o.identification_id"/>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <strong>Employee Name </strong>
+                                            </td>
+                                            <td width="5%" style="vertical-align: top; text-align: center;">:</td>
+                                            <td>
+                                                <span t-field="o.name"/>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <strong>Sex</strong>
+                                            </td>
+                                            <td width="5%" style="vertical-align: top; text-align: center;">:</td>
+                                            <td>
+                                                <span t-field="o.gender"/>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <strong>Marital Status</strong>
+                                            </td>
+                                            <td width="5%" style="vertical-align: top; text-align: center;">:</td>
+                                            <td>
+                                                <span t-field="o.marital"/>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <strong>Nationality</strong>
+                                            </td>
+                                            <td width="5%" style="vertical-align: top; text-align: center;">:</td>
+                                            <td>
+                                                <span t-field="o.country_id.name"/>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <strong>Date of Birth</strong>
+                                            </td>
+                                            <td width="5%" style="vertical-align: top; text-align: center;">:</td>
+                                            <td>
+                                                <span t-field="o.birthday"/>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <strong>Spouse Name</strong>
+                                            </td>
+                                            <td width="5%" style="vertical-align: top; text-align: center;">:</td>
+                                            <td>
+                                                <span t-esc="o.spouse_complete_name or ''"/>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <strong>Head Quarter</strong>
+                                            </td>
+                                            <td width="5%" style="vertical-align: top; text-align: center;">:</td>
+                                            <td>
+                                                <span t-esc="o.work_location_id.name or ''"/>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <strong>Personal Email</strong>
+                                            </td>
+                                            <td width="5%" style="vertical-align: top; text-align: center;">:</td>
+                                            <td>
+                                                <span t-field="o.private_email"/>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <strong>National ID</strong>
+                                            </td>
+                                            <td width="5%" style="vertical-align: top; text-align: center;">:</td>
+                                            <td>
+                                                <span t-field="o.identification_id"/>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <strong>Passport No</strong>
+                                            </td>
+                                            <td width="5%" style="vertical-align: top; text-align: center;">:</td>
+                                            <td>
+                                                <span t-field="o.passport_id"/>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <strong>Permanent Address</strong>
+                                            </td>
+                                            <td width="5%" style="vertical-align: top; text-align: center;">:</td>
+                                            <td>
+                                                <span t-field="o.place_of_birth"/>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </td>
+                                <td width="50%" style="vertical-align: top;margin: 0; padding: 0;">
+                                    <!-- Second Table -->
+                                    <table class="table table-borderless" style="margin-bottom: 0;">
+                                        <tr>
+                                            <td width="35%">
+                                                <strong>Date</strong>
+                                            </td>
+                                            <td  >:</td>
+                                            <!-- width="40%" style="padding: 0px 0 0px 0px; text-align: left;" -->
+                                            <td >
+                                                <span t-esc="context_timestamp(datetime.datetime.now()).strftime('%d-%m-%Y')" style="margin: 0; padding: 0; display: inline-block; text-align: left !important;"/>
+                                            </td>
+                                        </tr>
+
+                                        <tr>
+                                            <td>
+                                            </td>
+                                            <td>
+                                            </td>
+                                            <td >
+                                                <img t-if="o.image_1920" t-att-src="image_data_uri(o.image_1920)" style="max-width: 100px; border: 1px solid #000; padding: 2px; float:left"/>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <strong>Time</strong>
+                                            </td>
+                                            <td>:</td>
+                                            <td >
+                                                <span t-esc="context_timestamp(datetime.datetime.now()).strftime('%H:%M:%S')"/>
+                                            </td>
+                                        </tr>
+
+                                        <tr>
+                                            <td>
+                                                <strong>Date of Joining</strong>
+                                            </td>
+                                            <td >:</td>
+                                            <td>
+                                                <span t-field="o.create_date" t-options='{"format": "dd/MM/yyyy"}'/>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <strong>Present Gross Salary</strong>
+                                            </td>
+                                            <td>:</td>
+                                            <td>
+                                                <span t-esc="o.contract_id and o.contract_id[0].wage or ''"/>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <strong>Computer Knowledge</strong>
+                                            </td>
+                                            <td>:</td>
+                                            <td>
+
+                                                <t t-if="o.employee_skill_ids">
+                                                    <t t-foreach="o.employee_skill_ids" t-as="skill" t-key="skill_index">
+                                                        <span t-esc="skill.skill_id.name"/>
+                                                        <t t-if="skill_index &lt; len(o.employee_skill_ids) - 1">
+                                                            <span>, </span>
+                                                        </t>
+                                                    </t>
+                                                </t>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <strong>Company Phone</strong>
+                                            </td>
+                                            <td>:</td>
+                                            <td>
+                                                <span t-field="o.work_phone"/>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <strong>Present Address</strong>
+                                            </td>
+                                            <td>:</td>
+                                            <td>
+                                                <span t-field="o.address_home_id.street"/>
+                                                <span t-field="o.address_home_id.city"/>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <strong>Work Email</strong>
+                                            </td>
+                                            <td >:</td>
+                                            <td>
+                                                <span t-field="o.work_email"/>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <strong>Work Mobile</strong>
+                                            </td>
+                                            <td >:</td>
+
+                                            <td>
+                                                <span t-field="o.mobile_phone"/>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <strong>Manager</strong>
+                                            </td>
+                                            <td >:</td>
+                                            <td>
+                                                <span t-field="o.parent_id.name"/>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <strong>Employment Status</strong>
+                                            </td>
+                                            <td >:</td>
+                                            <td>
+                                                <span t-esc="o.employee_type or 'Full-time'"/>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                        </table>
+                        <br/>
+
+                        <!-- Academic Record -->
+                        <div style="margin-top: 10px;">
+                            <h5 style="text-decoration: underline; text-align: center; margin-bottom: 10px;">Academic Record</h5>
+                            <table style="width: 100%; font-size: 12px; border-collapse: collapse; border: 1px solid black;">
+                                <thead>
+                                    <tr>
+                                        <th style="border: 1px solid black; padding: 5px;">SL</th>
+                                        <th style="border: 1px solid black; padding: 5px;">Institute Name</th>
+                                        <th style="border: 1px solid black; padding: 5px;">Session Year</th>
+                                        <th style="border: 1px solid black; padding: 5px;">Degree/Certificate</th>
+                                        <th style="border: 1px solid black; padding: 5px;">Passing Year</th>
+                                        <th style="border: 1px solid black; padding: 5px;">Class/Division</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <t t-foreach="o.resume_line_ids.filtered(lambda l: l.line_type_id.name == 'Education')" t-as="edu">
+                                        <tr>
+                                            <td style="border: 1px solid black; padding: 5px;">
+                                                <t t-esc="edu_index + 1"/>
+                                            </td>
+                                            <td style="border: 1px solid black; padding: 5px;">
+                                                <t t-esc="edu.name"/>
+                                            </td>
+                                            <td style="border: 1px solid black; padding: 5px;">
+                                                <t t-esc="edu.date_end and edu.date_start.strftime('%Y') or ''"/>
+                                            </td>
+                                            <td style="border: 1px solid black; padding: 5px;">
+                                                <!-- <t t-esc="edu.display_type"/> -->
+                                                <t t-esc="edu.description"/>
+                                            </td>
+                                            <td style="border: 1px solid black; padding: 5px;">
+                                                <t t-esc="edu.date_end and edu.date_end.strftime('%Y') or ''"/>
+                                            </td>
+                                            <td style="border: 1px solid black; padding: 5px;">
+                                                <t t-esc="edu.class_division"/>
+                                            </td>
+                                        </tr>
+                                    </t>
+                                    <!-- Add empty rows if there are no records -->
+                                    <t t-if="not o.resume_line_ids.filtered(lambda l: l.line_type_id.name == 'Education')">
+                                        <tr>
+                                            <td colspan="6" style="border: 1px solid black; padding: 5px; text-align: center;">No academic records available</td>
+                                        </tr>
+                                    </t>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <!-- Employee Record -->
+
+                        <div style="margin-top:10px;">
+                            <h5 style="text-decoration: underline; text-align: center; margin-bottom: 10px;">Employee Record</h5>
+                            <table style="width: 100%; font-size: 12px; border-collapse: collapse; border: 1px solid black;">
+                                <thead>
+                                    <tr>
+                                        <th style="border: 1px solid black; padding: 5px;">SL</th>
+                                        <th style="border: 1px solid black; padding: 5px;">Company  Name </th>
+                                        <th style="border: 1px solid black; padding: 5px;">Job Duration </th>
+                                        <th style="border: 1px solid black; padding: 5px;">Designation</th>
+                                        <th style="border: 1px solid black; padding: 5px;">Salary</th>
+                                        <th style="border: 1px solid black; padding: 5px;">Leaving Reason </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <t t-foreach="o.resume_line_ids.filtered(lambda l: l.line_type_id.name == 'Experience')" t-as="exp">
+                                        <tr>
+                                            <td style="border: 1px solid black; padding: 5px;">
+                                                <t t-esc="exp_index + 1"/>
+                                            </td>
+                                            <td style="border: 1px solid black; padding: 5px;">
+                                                <t t-esc="exp.name"/>
+                                            </td>
+                                            <td style="border: 1px solid black; padding: 5px;">
+                                                <t t-if="exp.date_start">
+                                                    <span t-esc="exp.date_start.strftime('%b %Y')"/>
+                                                    <t t-if="exp.date_end">
+                                                     -                                                        <span t-esc="exp.date_end.strftime('%b %Y')"/>
+                                                    </t>
+                                                    <t t-else="">
+                                                    - Present
+                                                    </t>
+                                                </t>
+                                            </td>
+                                            <td style="border: 1px solid black; padding: 5px;">
+                                                <t t-esc="exp.description"/>
+                                            </td>
+                                            <td style="border: 1px solid black; padding: 5px;">
+                                                <t t-esc="exp.salary"/>
+                                            </td>
+                                            <td style="border: 1px solid black; padding: 5px;">
+                                                <t t-if="exp.departure_reason_id">
+                                                    <t t-esc="exp.departure_reason_id.name"/>
+                                                </t>
+                                                <t t-else="">
+                                                    <span>Present</span>
+                                                </t>
+                                            </td>
+                                        </tr>
+                                    </t>
+                                    <!-- Add empty rows if there are no records -->
+                                    <t t-if="not o.resume_line_ids.filtered(lambda l: l.line_type_id.name == 'Experience')">
+                                        <tr>
+                                            <td colspan="6" style="border: 1px solid black; padding: 5px; text-align: center;">No employee records available</td>
+                                        </tr>
+                                    </t>
+                                </tbody>
+                            </table>
+                        </div>
+                        <!-- Nominnee record  -->
+                        <div style="margin-top:10px;">
+                            <h5 style="text-decoration: underline; text-align: center; margin-bottom: 10px;">Nominee Record</h5>
+                            <table style="width: 100%; font-size: 12px; border-collapse: collapse; border: 1px solid black;margin:auto !important;">
+                                <thead>
+                                    <tr>
+                                        <th style="border: 1px solid black; padding: 5px;">SL</th>
+                                        <th style="border: 1px solid black; padding: 5px;">Name </th>
+                                        <th style="border: 1px solid black; padding: 5px;">Relation </th>
+                                        <th style="border: 1px solid black; padding: 5px;">Address</th>
+                                        <th style="border: 1px solid black; padding: 5px;">Photgraph</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <t t-foreach="o.nominee_ids" t-as="n">
+                                        <tr>
+                                            <td class="text-start align-middle table-sm !important" style="border: 1px solid black; padding-top: 3px;padding-bottom: 3px;padding-left: 3px;padding-right: 0px !important;">
+                                                <t t-esc="n_index + 1"/>
+                                            </td>
+                                            <td class="text-start align-middle table-sm !important" style="border: 1px solid black; padding: 4px;">
+                                                <t t-esc="n.name"/>
+                                            </td>
+                                            <td class="text-start align-middle table-sm !important" style="border: 1px solid black; padding: 4px;">
+                                                <t t-esc="n.relation"/>
+                                            </td>
+                                            <td class="text-start align-middle table-sm !important" style="border: 1px solid black; padding: 5px;">
+                                                <t t-esc="n.address "/>
+                                            </td>
+                                            <td class="text-center align-middle" style="border: 1px solid black; padding: 5px;">
+                                                <img t-if="n.photo" t-att-src="image_data_uri(n.photo)" style="width: 80px; height: 80px; border: 1px solid #000; padding: 2px; object-fit: cover; display: block;"/>
+                                            </td>
+
+                                        </tr>
+                                    </t>
+                                    <!-- Add empty rows if there are no records -->
+                                    <t t-if="not o.nominee_ids">
+                                        <tr>
+                                            <td colspan="5" style="border: 1px solid black; padding: 5px; text-align: center;">No employee nominee records available</td>
+                                        </tr>
+                                    </t>
+                                </tbody>
+                            </table>
+                        </div>
+                        <!-- Child Record  satrt-->
+                        <div style="margin-top:10px;">
+                            <h5 style="text-decoration: underline; text-align: center; margin-bottom: 10px;">Child Record</h5>
+                            <table class="table" style="width: 100%; font-size: 12px; border-collapse: collapse; border: 1px solid black;margin:auto !important;">
+                                <thead>
+                                    <tr>
+                                        <th style="border: 1px solid black; padding: 5px;">SL</th>
+                                        <th style="border: 1px solid black; padding: 5px;">Name </th>
+                                        <th style="border: 1px solid black; padding: 5px;">Birth Date</th>
+                                        <th style="border: 1px solid black; padding: 5px;">Photgraph</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <t t-foreach="o.children_ids" t-as="cln">
+                                        <tr>
+                                            <td class="text-start align-middle table-sm !important" style="border: 1px solid black; padding-top: 3px;padding-bottom: 3px;padding-left: 3px;padding-right: 0px !important;">
+                                                <t t-esc="cln_index + 1"/>
+                                            </td>
+                                            <td class="text-start align-middle table-sm !important" style="border: 1px solid black; padding: 4px;">
+                                                <t t-esc="cln.name"/>
+                                            </td>
+                                            <td class="text-start align-middle table-sm !important" style="border: 1px solid black; padding: 4px;">
+                                                <t t-esc="cln.birth_date"/>
+                                            </td>
+                                            <td class="text-center align-middle" style="border: 1px solid black; padding: 5px;">
+                                                <img t-if="cln.photo" t-att-src="image_data_uri(cln.photo)" style="width: 80px; height: 80px; border: 1px solid #000; padding: 2px; object-fit: cover; display: block;"/>
+                                            </td>
+
+                                        </tr>
+                                    </t>
+                                    <!-- Add empty rows if there are no records -->
+                                    <t t-if="not o.children_ids">
+                                        <tr>
+                                            <td colspan="4" style="border: 1px solid black; padding: 5px; text-align: center;">No employee child records available</td>
+                                        </tr>
+                                    </t>
+                                </tbody>
+                            </table>
+                        </div>
+                        <!-- Child Record  End -->
+                        <!-- Training Record start -->
+                        <div style="margin-top: 10px;">
+                            <h5 style="text-decoration: underline; text-align: center; margin-bottom: 10px;">Training Record</h5>
+                            <table style="width: 100%; font-size: 12px; border-collapse: collapse; border: 1px solid black;">
+                                <thead>
+                                    <tr>
+                                        <th style="border: 1px solid black; padding: 5px;">SL</th>
+                                        <th style="border: 1px solid black; padding: 5px;">Training Title </th>
+                                        <th style="border: 1px solid black; padding: 5px;">Year</th>
+                                        <th style="border: 1px solid black; padding: 5px;">Institute</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <t t-foreach="o.trn_ids" t-as="trn">
+                                        <tr>
+                                            <td style="border: 1px solid black; padding: 5px;">
+                                                <t t-esc="trn_index + 1"/>
+                                            </td>
+                                            <td style="border: 1px solid black; padding: 5px;">
+                                                <t t-esc="trn.training_title"/>
+                                            </td>
+                                            <td style="border: 1px solid black; padding: 5px;">
+                                                <t t-esc="trn.training_year"/>
+                                            </td>
+                                            <td style="border: 1px solid black; padding: 5px;">
+                                                <t t-esc="trn.institute"/>
+                                            </td>
+
+                                        </tr>
+                                    </t>
+                                    <!-- Add empty rows if there are no records -->
+                                    <t t-if="not o.trn_ids">
+                                        <tr>
+                                            <td colspan="4" style="border: 1px solid black; padding: 5px; text-align: center;">No employee Training records available</td>
+                                        </tr>
+                                    </t>
+                                </tbody>
+                            </table>
+                        </div>
+                        <!-- Training Record ENd  -->
+                        <!-- Emergency Contact -->
+                        <div style="margin-top:10px">
+                            <h5 style="text-decoration: underline; text-align: center; margin-bottom: 10px;">Emergency Contact Details</h5>
+                            <table style="width: 100%; font-size: 12px; border-collapse: collapse; border: 1px solid black;">
+                                <h3 style="text-align: center; font-size: 12px; margin-bottom: 10px;">(Please indicate the Name and Contact number of a person who can be contacted on your bhelaf in case of an emergency)</h3>
+                                <thead>
+                                    <tr>
+                                        <th style="border: 1px solid black; padding: 5px;">SL</th>
+                                        <th style="border: 1px solid black; padding: 5px;">Name </th>
+                                        <th style="border: 1px solid black; padding: 5px;">Telephone No. </th>
+                                        <th style="border: 1px solid black; padding: 5px;">Mobile No.</th>
+                                        <th style="border: 1px solid black; padding: 5px;">Contact Address</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <t t-foreach="o.contact_ids" t-as="cnt">
+                                        <tr>
+                                            <td style="border: 1px solid black; padding: 5px;">
+                                                <t t-esc="cnt_index + 1"/>
+                                            </td>
+                                            <td style="border: 1px solid black; padding: 5px;">
+                                                <t t-esc="cnt.name"/>
+                                            </td>
+                                            <td style="border: 1px solid black; padding: 5px;">
+                                                <t t-esc="cnt.telephone_no"/>
+                                            </td>
+                                            <td style="border: 1px solid black; padding: 5px;">
+                                                <t t-esc="cnt.mobile_no"/>
+                                            </td>
+                                            <td style="border: 1px solid black; padding: 5px;">
+                                                <t t-esc="cnt.contact_address"/>
+                                            </td>
+
+                                        </tr>
+                                    </t>
+                                    <!-- Add empty rows if there are no records -->
+                                    <t t-if="not o.contact_ids">
+                                        <tr>
+                                            <td colspan="5" style="border: 1px solid black; padding: 5px; text-align: center;">No employee emergency contact records available</td>
+                                        </tr>
+                                    </t>
+                                </tbody>
+                            </table>
+                        </div>
+                        <br />
+                        <br />
+                        <br />
+                        <br />
+                        <!-- Signature Section -->
+                        <div style="margin-top: 40px;">
+
+                            <div style="border-top: 1px dotted #000; width: 180px; margin-bottom: 30px;"></div>
+                        </div>
+                        <p>
+                            <strong>Manager-HR &amp; Admin</strong>
+                        </p>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+</odoo>
